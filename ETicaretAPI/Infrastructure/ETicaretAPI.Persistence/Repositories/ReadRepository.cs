@@ -25,14 +25,15 @@ namespace ETicaretAPI.Persistence.Repositories
         //direk olarak table ı döndürdük
         public IQueryable<T> GetAll()
             => Table;
-        //T inheritini base entity üzerinden aldığı için .id ile direk eşitleme yapabiliyorum
-        public async Task<T> GetByIdAsync(string id)
-            => await Table.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id));
-        //async olduğu için await ile birlikte kullandık
-        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method)
-            => await Table.SingleOrDefaultAsync(method);
         //şartı belirterek table döndürdük
         public IQueryable<T> GetWhere(Expression<Func<T, bool>> method)
             =>Table.Where(method);
+        //async olduğu için await ile birlikte kullandık
+        public async Task<T> GetSingleAsync(Expression<Func<T, bool>> method)
+            => await Table.SingleOrDefaultAsync(method);
+        //T inheritini base entity üzerinden aldığı için .id ile direk eşitleme yapabiliyorum
+        public async Task<T> GetByIdAsync(string id)
+            //=> await Table.FirstOrDefaultAsync(data => data.Id == Guid.Parse(id));
+            => await Table.FindAsync(Guid.Parse(id));
     }
 }
