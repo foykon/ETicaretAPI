@@ -26,11 +26,11 @@ namespace ETicaretAPI.API.Controllers
         }
 
         [HttpGet]
-        public async Task GetProducts()
+        public async Task<IActionResult> GetProducts()
         {
-            Order o = await _orderReadRepository.GetByIdAsync("ec13b024-d43d-40bb-9703-b28afe484c15");
-            o.Address = "bbbb";
-            await _orderWriteRepository.SaveAsync();
+           
+
+            return Ok("merhaba");
 
             
         }
