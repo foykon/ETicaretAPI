@@ -39,7 +39,10 @@ namespace ETicaretAPI.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Post(VM_Create_Product model)
         {
+            if (ModelState.IsValid)
+            {
 
+            }
             await _productWriteRepository.AddAsync(new()
             {
                 Name= model.Name,
@@ -48,7 +51,7 @@ namespace ETicaretAPI.API.Controllers
             });
             await _productWriteRepository.SaveAsync();
             return Ok();
-        }
+         }
 
         [HttpPut]
         public async Task<IActionResult> Put(VM_Update_Product model)
